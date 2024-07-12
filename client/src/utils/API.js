@@ -1,84 +1,6 @@
-import { gql } from "@apollo/client";
-import client from "../App";
-
-// Define your queries and mutations
-const GET_ME = gql`
-  query me {
-    me {
-      _id
-      username
-      email
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
-        link
-      }
-    }
-  }
-`;
-
-const LOGIN_USER = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
-    }
-  }
-`;
-
-const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
-    }
-  }
-`;
-
-const SAVE_BOOK = gql`
-  mutation saveBook($bookData: BookInput!) {
-    saveBook(bookData: $bookData) {
-      _id
-      username
-      email
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
-        link
-      }
-    }
-  }
-`;
-
-const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: String!) {
-    removeBook(bookId: $bookId) {
-      _id
-      username
-      email
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
-        link
-      }
-    }
-  }
-`;
+import client from "../App"; // Correct import path to get the client
+import { GET_ME } from "./queries";
+import { LOGIN_USER, ADD_USER, SAVE_BOOK, REMOVE_BOOK } from "./mutations";
 
 // Helper functions to execute the GraphQL operations
 export const getMe = async () => {
@@ -145,8 +67,7 @@ export const deleteBook = async (bookId) => {
   }
 };
 
-// make a search to google books api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
+// Make a search to Google Books API
 export const searchGoogleBooks = (query) => {
   return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
 };
