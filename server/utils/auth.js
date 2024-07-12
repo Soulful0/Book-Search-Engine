@@ -1,5 +1,5 @@
-import decode from "jwt-decode";
-import jwt from "jsonwebtoken";
+const decode = require("jwt-decode");
+const jwt = require("jsonwebtoken");
 
 // set token secret and expiration date
 const secret = "mysecretsshhhhh";
@@ -37,4 +37,4 @@ const signToken = ({ username, email, _id }) => {
   return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
 };
 
-export { authMiddleware, signToken };
+module.exports = { authMiddleware, signToken };
