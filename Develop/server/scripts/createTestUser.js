@@ -5,7 +5,7 @@ const { signToken } = require("../utils/auth");
 const createTestUser = async () => {
   try {
     // Connect to the database
-    await mongoose.connect("mongodb://localhost:27017/yourDatabaseName", {
+    await mongoose.connect("mongodb://localhost:27017/bookSearchDB", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
