@@ -55,23 +55,32 @@ const SearchBooks = () => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
+      console.error("No token found, please login.");
       return false;
     }
 
     try {
-      console.log("Saving book:", bookToSave); // Log the book input
+      console.log("Saving book:", bookToSave); // Added logging for book data
+
       const { data } = await saveBook({
         variables: { input: bookToSave },
+        context: {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
       });
+
+      console.log("Book saved:", data);
 
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
-      console.error("Error saving book:", err); // Log detailed error information
+      console.error("Error saving book:", err); // Added logging for error details
       if (err.graphQLErrors) {
-        console.error("GraphQL Errors:", err.graphQLErrors); // Log GraphQL errors
+        console.error("GraphQL Errors:", err.graphQLErrors); // Added logging for GraphQL errors
       }
       if (err.networkError) {
-        console.error("Network Error:", err.networkError); // Log network errors
+        console.error("Network Error:", err.networkError); // Added logging for network errors
       }
     }
   };

@@ -46,8 +46,8 @@ const SavedBooks = () => {
 
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
-        <Container>
+      <div className="text-light bg-dark p-5">
+        <Container fluid>
           <h1>Viewing saved books!</h1>
         </Container>
       </div>
@@ -72,7 +72,9 @@ const SavedBooks = () => {
                     ) : null}
                     <Card.Body>
                       <Card.Title>{book.title}</Card.Title>
-                      <p className="small">Authors: {book.authors}</p>
+                      <p className="small">
+                        Authors: {book.authors.join(", ")}
+                      </p>
                       <Card.Text>{book.description}</Card.Text>
                       <Button
                         className="btn-block btn-danger"
